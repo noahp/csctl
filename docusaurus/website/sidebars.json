@@ -1,0 +1,23 @@
+{
+  "docs": {
+    "Getting Started": [
+      "overview"
+    ],
+    "Commands": [
+      "command-login",
+      "command-logout",
+      "command-get-resource",
+      "command-update-resource",
+      "command-create-resource",
+      "command-deploy-resource",
+      "command-get-resource-version",
+      "command-get-environment",
+      "command-create-environment",
+      "command-delete-environment",
+      "command-get-environment-link",
+      "command-create-environment-link",
+      "command-delete-environment-link",
+      "command-promote"
+    ]
+  }
+}

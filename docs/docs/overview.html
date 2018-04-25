@@ -1,0 +1,69 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"/><meta http-equiv="X-UA-Compatible" content="IE=edge"/><title>Overview · Containership CTL</title><meta name="viewport" content="width=device-width"/><meta name="generator" content="Docusaurus"/><meta property="og:title" content="Overview · Containership CTL"/><meta property="og:type" content="website"/><meta property="og:url" content="https://containership.github.io/csctl/index.html"/><meta property="og:description" content="## Overview"/><meta property="og:image" content="https://containership.github.io/csctl/img/containership.svg"/><meta name="twitter:card" content="summary"/><meta name="twitter:image" content="https://containership.github.io/csctl/img/containership.svg"/><link rel="shortcut icon" href="/csctl/img/containership.svg"/><link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css"/><script type="text/javascript" src="https://buttons.github.io/buttons.js"></script><link rel="stylesheet" href="/csctl/css/main.css"/></head><body class="sideNavVisible doc separateOnPageNav"><div class="fixedHeaderContainer"><div class="headerWrapper wrapper"><header><a href="/csctl/"><img class="logo" src="/csctl/img/containership.svg" alt="Containership CTL"/><h2 class="headerTitle">Containership CTL</h2></a><div class="navigationWrapper navigationSlider"><nav class="slidingNav"><ul class="nav-site nav-site-internal"><li class="siteNavGroupActive siteNavItemActive"><a href="/csctl/docs/overview.html" target="_self">Docs</a></li></ul></nav></div></header></div></div><div class="navPusher"><div class="docMainWrapper wrapper"><div class="container docsNavContainer" id="docsNav"><nav class="toc"><div class="toggleNav"><section class="navWrapper wrapper"><div class="navBreadcrumb wrapper"><div class="navToggle" id="navToggler"><i></i></div><h2><i>›</i><span>Getting Started</span></h2></div><div class="navGroups"><div class="navGroup navGroupActive"><h3>Getting Started</h3><ul><li class="navListItem navListItemActive"><a class="navItem navItemActive" href="/csctl/docs/overview.html">Overview</a></li></ul></div><div class="navGroup navGroupActive"><h3>Commands</h3><ul><li class="navListItem"><a class="navItem" href="/csctl/docs/command-login.html">login</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-logout.html">logout</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-get-resource.html">get resource</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-update-resource.html">update resource</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-create-resource.html">create resource</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-deploy-resource.html">deploy resource</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-get-resource-version.html">get resource-version</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-get-environment.html">get environment</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-create-environment.html">create environment</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-delete-environment.html">delete environment</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-get-environment-link.html">get environment-link</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-create-environment-link.html">create environment-link</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-delete-environment-link.html">delete environment-link</a></li><li class="navListItem"><a class="navItem" href="/csctl/docs/command-promote.html">promote</a></li></ul></div></div></section></div><script>
+          var toggler = document.getElementById('navToggler');
+          var nav = document.getElementById('docsNav');
+          toggler.onclick = function() {
+            nav.classList.toggle('docsSliderActive');
+          };
+        </script></nav></div><div class="container mainContainer"><div class="wrapper"><div class="post"><header class="postHeader"><h1>Overview</h1></header><article><div><span><h2><a class="anchor" aria-hidden="true" id="overview"></a><a href="#overview" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Overview</h2>
+<p>The Containership Control Client allows you to easily label clusters, define <code>resources</code> and deploy your resources to one or more Containership clusters.</p>
+<h2><a class="anchor" aria-hidden="true" id="getting-started"></a><a href="#getting-started" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Getting Started</h2>
+<p>Login to your Containership Cloud account with your authentication method:</p>
+<pre><code class="hljs"># csctl login &lt;<span class="hljs-function"><span class="hljs-keyword">method</span>&gt;
+&gt; <span class="hljs-title">csctl</span> <span class="hljs-title">login</span> <span class="hljs-title">github</span>
+
+&gt; <span class="hljs-title">Please</span> <span class="hljs-title">Enter</span> <span class="hljs-title">Your</span> <span class="hljs-title">Username</span>:</span> containershipbot
+&gt; Please Enter Your Password: **********
+&gt; Please Enter your <span class="hljs-number">2</span>FA Code: ******
+
+You have been successfully logged <span class="hljs-keyword">in</span>!@
+</code></pre>
+<blockquote>
+<p>See <a href="command-login">command-login</a> for more information on the available options.</p>
+</blockquote>
+<p>Once you are logged-in you can retrieve inforation from your Containership Cloud account such as the <code>attached</code> clusters.</p>
+<pre><code class="hljs">&gt; csctl get clusters
+
+ID                                      NAME            ORGANIZATION    LABELS
+<span class="hljs-number">26</span>eb6caf-cc1d<span class="hljs-number">-42e6</span><span class="hljs-number">-80</span>c1<span class="hljs-number">-5</span>b256e94648b    cluster1        sample-org      team=ui,env=dev
+<span class="hljs-number">2149</span>a670-e184<span class="hljs-number">-4</span>bfe-b200<span class="hljs-number">-60</span>a94035512c    cluster2        sample-org      team=api,env=dev
+</code></pre>
+<p>In order to deploy resources to different clusters you need to first create the <code>resource</code> and also create an <code>environment</code></p>
+<pre><code class="hljs">&gt; csctl create<span class="hljs-built_in"> resource </span>myredisapp -f ./redis.yaml
+
+Successfully created<span class="hljs-built_in"> resource </span>`myredisapp`
+
+&gt; csctl create environment dev
+
+Successfully created environment `dev`
+</code></pre>
+<p>You cannot promote that app to the environment quite yet, however. If you try you will see that the environment does not know about any target clusters to deploy to!</p>
+<pre><code class="hljs">&gt; csctl promote myredisapp --to dev
+
+Failed to promote `myredisapp` to environment `dev`.
+There were no associated clusters linked <span class="hljs-keyword">with</span> the environment.
+</code></pre>
+<p>You can easily associate clusters with and <code>environment</code> by creating one or more <code>links</code>. The following command creates a link to all clusters with the <code>env</code> label set to <code>dev</code>.</p>
+<pre><code class="hljs">&gt; csctl <span class="hljs-keyword">create</span> environment-link dev -l env=dev
+
+Successfully created environment link <span class="hljs-keyword">on</span> the <span class="hljs-symbol">`dev`</span> environment.
+</code></pre>
+<p>Now when you promote resources to that environment, all associated clusters will be deployed with the <code>resource</code>.</p>
+<pre><code class="hljs">&gt; csctl promote myredisapp --<span class="hljs-keyword">to</span> dev
+
+myredisapp <span class="hljs-built_in">has</span> been successfully promoted <span class="hljs-keyword">to</span> the `dev` environment.
+It <span class="hljs-built_in">has</span> been deployed <span class="hljs-keyword">to</span> the following cluster<span class="hljs-variable">s:</span>
+
+cluster1
+cluster2
+</code></pre>
+<blockquote>
+<p>All of our commands support the <code>--dry-run</code> flag so you can see what modfiications will take place before you run them.</p>
+</blockquote>
+<p>Take a look at each of the individual command documentation pages for more advanced information!</p>
+<h2><a class="anchor" aria-hidden="true" id="coming-soon"></a><a href="#coming-soon" aria-hidden="true" class="hash-link" ><svg aria-hidden="true" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>Coming Soon</h2>
+<ul>
+<li>Integration with Helm for your defined <code>resources</code> and <code>environments</code></li>
+<li>You will soon be able to automate the provisioning of your infrastructure through the Containership Cloud Control</li>
+<li>Support for the upcoming <code>cluster federation</code> standard being worked on in the Kubernetes community</li>
+</ul>
+</span></div></article></div><div class="docs-prevnext"><a class="docs-next button" href="command-login.html">login →</a></div></div></div><nav class="onPageNav"><ul class="toc-headings"><li><a href="#overview">Overview</a></li><li><a href="#getting-started">Getting Started</a></li><li><a href="#coming-soon">Coming Soon</a></li></ul></nav></div><footer class="nav-footer" id="footer"><section class="copyright">Copyright © 2018 Containership</section></footer></div></body></html>

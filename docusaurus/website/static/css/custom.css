@@ -1,0 +1,27 @@
+/* your custom css */
+
+.learnhow {
+    background-color: #f7f7f7;
+    height: 200px;
+}
+
+.learnhow p {
+    text-align: center;
+    vertical-align: middle;
+    line-height: 200px;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
