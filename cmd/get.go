@@ -4,11 +4,14 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"github.com/ghodss/yaml"
+	//"github.com/ghodss/yaml"
 	"github.com/go-resty/resty"
+	//"github.com/olekukonko/tablewriter"
 	"github.com/pkg/errors"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
+
+	"github.com/containership/csctl/pkg/cloud/api/types"
 )
 
 // Flags
@@ -32,9 +35,30 @@ func getResource(url string) (string, error) {
 	return string(resp.Body()), err
 }
 
-func getOrganizations() (string, error) {
+func getOrganizations() (*[]types.Organization, error) {
 	url := fmt.Sprintf("%s/v3/organizations", viper.Get("apiBaseURL"))
-	return getResource(url)
+
+	token := viper.GetString("token")
+	if token == "" {
+		return nil, errors.New("please provide a token")
+	}
+
+	authHeader := fmt.Sprintf("JWT %s", token)
+
+	orgs := make([]types.Organization, 0)
+	resp, err := resty.R().SetHeader("Authorization", authHeader).
+		SetResult(orgs).
+		Get(url)
+
+	if err != nil {
+		return nil, errors.Wrap(err, "error requesting resource")
+	}
+
+	if resp.IsError() {
+		return nil, errors.Errorf("Containership Cloud responded with status %d: %s", resp.StatusCode(), resp.Body())
+	}
+
+	return resp.Result().(*[]types.Organization), err
 }
 
 func getClusters(organizationID string) (string, error) {
@@ -49,7 +73,7 @@ func getNodePools(organizationID, clusterID string) (string, error) {
 }
 
 // TODO this function is beyond terrible
-func outputResponse(resp string) {
+func outputResponse(resp interface{}) {
 	switch outputFormat {
 	case "", "table":
 		// Default
@@ -57,15 +81,7 @@ func outputResponse(resp string) {
 		fmt.Println(resp)
 
 	case "json":
-		respMap := make([]map[string]interface{}, 0)
-
-		err := json.Unmarshal([]byte(resp), &respMap)
-		if err != nil {
-			fmt.Printf("Error unmarshalling JSON: %v", err)
-			return
-		}
-
-		j, err := json.MarshalIndent(respMap, "", "  ")
+		j, err := json.MarshalIndent(resp, "", "  ")
 		if err != nil {
 			fmt.Printf("Error formatting JSON: %v", err)
 			return
@@ -73,23 +89,20 @@ func outputResponse(resp string) {
 
 		fmt.Println(string(j))
 
-		// TODO
-		fmt.Println("(output format %s not supported)", outputFormat)
-
 	case "yaml":
-		y, err := yaml.JSONToYAML([]byte(resp))
-		if err != nil {
-			fmt.Println("(Error converting to YAML)")
-			return
-		}
+		//y, err := yaml.JSONToYAML([]byte(resp))
+		//if err != nil {
+		//fmt.Println("(Error converting to YAML)")
+		//return
+		//}
 
-		fmt.Println(string(y))
+		//fmt.Println(string(y))
 
 	case "jsonpath":
 		fallthrough
 	default:
 		// TODO
-		fmt.Println("(output format %s not supported)", outputFormat)
+		fmt.Printf("(output format %s not supported)", outputFormat)
 	}
 }
 
