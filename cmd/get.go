@@ -19,57 +19,39 @@ var (
 	outputFormat string
 )
 
-func getResource(url string) (string, error) {
+func getResource(url string, output interface{}) error {
 	token := viper.GetString("token")
 	if token == "" {
-		return "", errors.New("please provide a token")
+		return errors.New("please provide a token")
 	}
 
 	authHeader := fmt.Sprintf("JWT %s", token)
 
-	resp, err := resty.R().SetHeader("Authorization", authHeader).Get(url)
-	if err != nil {
-		return "", errors.Wrap(err, "error requesting resource")
-	}
-
-	return string(resp.Body()), err
-}
-
-func getOrganizations() (*[]types.Organization, error) {
-	url := fmt.Sprintf("%s/v3/organizations", viper.Get("apiBaseURL"))
-
-	token := viper.GetString("token")
-	if token == "" {
-		return nil, errors.New("please provide a token")
-	}
-
-	authHeader := fmt.Sprintf("JWT %s", token)
-
-	orgs := make([]types.Organization, 0)
 	resp, err := resty.R().SetHeader("Authorization", authHeader).
-		SetResult(orgs).
+		SetResult(output).
 		Get(url)
 
 	if err != nil {
-		return nil, errors.Wrap(err, "error requesting resource")
+		return errors.Wrap(err, "error requesting resource")
 	}
 
 	if resp.IsError() {
-		return nil, errors.Errorf("Containership Cloud responded with status %d: %s", resp.StatusCode(), resp.Body())
+		return errors.Errorf("Containership Cloud responded with status %d: %s", resp.StatusCode(), resp.Body())
 	}
 
-	return resp.Result().(*[]types.Organization), err
+	return nil
 }
 
-func getClusters(organizationID string) (string, error) {
-	url := fmt.Sprintf("%s/v3/organizations/%s/clusters", viper.Get("apiBaseURL"), organizationID)
-	return getResource(url)
+func listOrganizations() ([]types.Organization, error) {
+	url := fmt.Sprintf("%s/v3/organizations", viper.Get("apiBaseURL"))
+	orgs := make([]types.Organization, 0)
+	return orgs, getResource(url, &orgs)
 }
 
-func getNodePools(organizationID, clusterID string) (string, error) {
-	url := fmt.Sprintf("%s/v3/organizations/%s/clusters/%s/node-pools",
-		viper.Get("provisionBaseURL"), organizationID, clusterID)
-	return getResource(url)
+func getOrganization(id string) (*types.Organization, error) {
+	url := fmt.Sprintf("%s/v3/organizations/%s", viper.Get("apiBaseURL"), id)
+	var org types.Organization
+	return &org, getResource(url, &org)
 }
 
 // TODO this function is beyond terrible
@@ -114,47 +96,63 @@ var getCmd = &cobra.Command{
 
 TODO this is a long description`,
 
-	Args: cobra.ExactArgs(1),
+	Args: cobra.RangeArgs(1, 2),
 
 	Run: func(cmd *cobra.Command, args []string) {
 		resource := args[0]
 		switch resource {
 		case "org", "orgs", "organization", "organizations":
-			resp, err := getOrganizations()
+			var resp interface{}
+			var err error
+			if len(args) == 2 {
+				orgId := args[1]
+				resp, err = getOrganization(orgId)
+			} else {
+				resp, err = listOrganizations()
+			}
+
 			if err != nil {
 				fmt.Println(err)
-				return
+			} else {
+				outputResponse(resp)
 			}
 
-			outputResponse(resp)
+			/*
+				case "cluster", "clusters":
+					if organizationID == "" {
+						fmt.Println("organization is required")
+						return
+					}
 
-		case "cluster", "clusters":
-			if organizationID == "" {
-				fmt.Println("organization is required")
-				return
-			}
+					var resp interface{}
+					var err error
+					if len(args) == 2 {
+						clusterId := args[1]
+						resp, err = getCluster(orgId, clusterId)
+					} else {
+						resp, err = listClusters(orgId)
+					}
 
-			resp, err := getClusters(organizationID)
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
+					if err != nil {
+						fmt.Println(err)
+					} else {
+						outputResponse(resp)
+					}
 
-			outputResponse(resp)
+						case "nodepool", "nodepools", "np", "nps":
+							if organizationID == "" || clusterID == "" {
+								fmt.Println("organization and cluster are required")
+								return
+							}
 
-		case "nodepool", "nodepools", "np", "nps":
-			if organizationID == "" || clusterID == "" {
-				fmt.Println("organization and cluster are required")
-				return
-			}
+							resp, err := getNodePools(organizationID, clusterID)
 
-			resp, err := getNodePools(organizationID, clusterID)
-			if err != nil {
-				fmt.Println(err)
-				return
-			}
-
-			outputResponse(resp)
+							if err != nil {
+								fmt.Println(err)
+							} else {
+								outputResponse(resp)
+							}
+			*/
 
 		default:
 			fmt.Println("Error: invalid resource specified: %q", resource)
